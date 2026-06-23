@@ -32,6 +32,10 @@ tarefas = []
 # =====================================================================
 
 def adicionar_tarefa(titulo, prioridade="media"):
+    tarefa = {'titulo': titulo, 'concluida': False, 'prioridade': prioridade} # False pq ainda não foi concluida. Isso é o dicionário
+    #Dicionário com as chaves, média pq sempre começa com média, mas o usuário pode alterar a prioridade
+    tarefas.append(tarefa) # adiciona o dicionário na lista de tarefas
+    print(f"Tarefa '{titulo}' adicionada com prioridade '{prioridade}'") # exibe a mensagem de confirmação
     """
     Cria uma nova tarefa e adiciona à lista `tarefas`.
 
@@ -43,14 +47,22 @@ def adicionar_tarefa(titulo, prioridade="media"):
     Depois de adicionar, exiba uma mensagem confirmando que a tarefa
     foi criada (pode usar print).
     """
-    # TODO (Aula 1): crie o dicionário da tarefa
-    # TODO (Aula 1): adicione o dicionário à lista `tarefas`
-    # TODO (Aula 1): exiba uma mensagem de confirmação
+    # TODO (Aula 1): crie o dicionário da tarefa ✓
+    # TODO (Aula 1): adicione o dicionário à lista `tarefas` ✓
+    # TODO (Aula 1): exiba uma mensagem de confirmação ✓
     # TODO (Aula 3): depois de implementar salvar_tarefas(), chame-a aqui
     pass
 
 
 def listar_tarefas():
+    if len(tarefas) == 0: # tarefas.count siginifica que conta quantos elementos tem na lista
+            print("Nenhuma tarefa cadastrada")
+            return
+    else:
+        for index, tarefa in enumerate(tarefas, start=1): # index número da linha posição
+            status = "X" if tarefa ["concluida"] else " "
+            print(f"{index}. [{status}] {tarefa['titulo']} (prioridade: {tarefa['prioridade']})") 
+
     """
     Exibe todas as tarefas cadastradas na lista `tarefas`.
 
@@ -65,8 +77,8 @@ def listar_tarefas():
         1. [ ] Estudar Python (prioridade: alta)
         2. [X] Lavar a louça (prioridade: baixa)
     """
-    # TODO (Aula 1): trate o caso de lista vazia
-    # TODO (Aula 1): percorra a lista de tarefas e exiba cada uma formatada
+    # TODO (Aula 1): trate o caso de lista vazia ✓
+    # TODO (Aula 1): percorra a lista de tarefas e exiba cada uma formatada ✓
     pass
 
 
@@ -211,8 +223,9 @@ def exibir_menu():
     """
     print("=== GERENCIADOR DE TAREFAS ===")
     print("1. Adicionar tarefa")
-    print("2. Listar tarefas")
-    # TODO (Aula 1): adicione a opção "Sair" (vai virar a opção 7 ao final)
+    print("2. Listar tarefas") 
+    print("7. Sair")
+    # TODO (Aula 1): adicione a opção "Sair" (vai virar a opção 7 ao final) ✓
     # TODO (Aula 2): adicione as opções 3 (Concluir), 4 (Remover), 5 (Editar)
     # TODO (Aula 3): adicione a opção 6 (Listar pendentes) e renumere "Sair" para 7
 
@@ -253,7 +266,11 @@ def main():
         elif opcao == "2":
             listar_tarefas()
 
-        # TODO (Aula 1): implemente a opção de Sair (com break)
+        elif opcao == "7":
+            print("Saindo do programa.")
+            break
+
+        # TODO (Aula 1): implemente a opção de Sair (com break) ✓
         # TODO (Aula 2): implemente as opções de concluir, remover e editar
         #                (cada uma com try/except para ValueError)
         # TODO (Aula 3): implemente a opção de listar pendentes e
