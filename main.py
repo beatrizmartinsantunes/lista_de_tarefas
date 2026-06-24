@@ -87,6 +87,15 @@ def listar_tarefas():
 # =====================================================================
 
 def concluir_tarefa(indice):
+    if indice < 1 or indice > len(tarefas): # len(tarfas) tamanho da lista, de quantas tarefas tem na lista
+        print("Numero de tarefa invalido.")
+        return
+    else:
+        for index, tarefa in enumerate(tarefas, start=1):
+            if index == indice:
+                tarefa["concluida"] = True
+                print(f'Tarefa "{index}. {tarefa["titulo"]}" concluida!')
+
     """
     Marca como concluída a tarefa na posição `indice` (começando em 1).
 
@@ -100,14 +109,24 @@ def concluir_tarefa(indice):
     Lembre-se: o índice exibido para o usuário começa em 1, mas listas em
     Python começam em 0. Você vai precisar ajustar isso (indice - 1).
     """
-    # TODO (Aula 2): valide o índice recebido
-    # TODO (Aula 2): marque a tarefa como concluída
-    # TODO (Aula 2): exiba uma mensagem de confirmação
+    # TODO (Aula 2): valide o índice recebido✓
+    # TODO (Aula 2): marque a tarefa como concluída✓
+    # TODO (Aula 2): exiba uma mensagem de confirmação✓
     # TODO (Aula 3): depois de implementar salvar_tarefas(), chame-a aqui
     pass
 
 
 def remover_tarefa(indice):
+    if indice < 1 or indice > len(tarefas):
+        print("Numero de tarefa invalido.")
+        return
+    elif indice >= 1 and indice <= len(tarefas):
+        for index, tarefa in enumerate(tarefas, start=1):
+            if index == indice:
+                tarefa_removida = tarefas.pop(indice - 1) # pop apaga a tarefa da lista e guarda na variável tarefa_removida e diminui o indice para ficar correto, pois o índice do usuário começa em 1 e o índice da lista começa em 0
+                print(f'Tarefa "{indice}. {tarefa_removida["titulo"]}" removida!')
+
+                
     """
     Remove da lista a tarefa na posição `indice` (começando em 1).
 
@@ -117,14 +136,24 @@ def remover_tarefa(indice):
           a tarefa removida ao mesmo tempo.
         - Exiba uma mensagem confirmando qual tarefa foi removida.
     """
-    # TODO (Aula 2): valide o índice recebido
-    # TODO (Aula 2): remova a tarefa da lista usando pop()
-    # TODO (Aula 2): exiba uma mensagem de confirmação
+    # TODO (Aula 2): valide o índice recebido  ✓
+    # TODO (Aula 2): remova a tarefa da lista usando pop() ✓
+    # TODO (Aula 2): exiba uma mensagem de confirmação ✓
     # TODO (Aula 3): depois de implementar salvar_tarefas(), chame-a aqui
-    pass
+pass
 
 
 def editar_tarefa(indice, novo_titulo):
+    if indice < 1 or indice > len(tarefas):
+        print("Numero de tarefa invalido.")
+        return
+    elif indice >= 1 and indice <= len(tarefas):
+        for index, tarefa in enumerate(tarefas, start=1):
+            if index == indice:
+                tarefa["titulo"] = novo_titulo
+                print(f'Tarefa atualizada {indice}. {tarefa["titulo"]}')
+                
+
     """
     [DESAFIO] Atualiza o título de uma tarefa existente.
 
@@ -134,9 +163,9 @@ def editar_tarefa(indice, novo_titulo):
           outras informações (concluida, prioridade).
         - Exiba uma mensagem confirmando a atualização.
     """
-    # TODO (Aula 2): valide o índice recebido
-    # TODO (Aula 2): atualize o título da tarefa
-    # TODO (Aula 2): exiba uma mensagem de confirmação
+    # TODO (Aula 2): valide o índice recebido ✓
+    # TODO (Aula 2): atualize o título da tarefa ✓
+    # TODO (Aula 2): exiba uma mensagem de confirmação ✓
     # TODO (Aula 3): depois de implementar salvar_tarefas(), chame-a aqui
     pass
 
@@ -223,10 +252,13 @@ def exibir_menu():
     """
     print("=== GERENCIADOR DE TAREFAS ===")
     print("1. Adicionar tarefa")
-    print("2. Listar tarefas") 
+    print("2. Listar tarefas")
+    print("3. Concluir tarefa")
+    print("4. Remover tarefa")
+    print("5. Editar tarefa") 
     print("7. Sair")
     # TODO (Aula 1): adicione a opção "Sair" (vai virar a opção 7 ao final) ✓
-    # TODO (Aula 2): adicione as opções 3 (Concluir), 4 (Remover), 5 (Editar)
+    # TODO (Aula 2): adicione as opções 3 (Concluir), 4 (Remover), 5 (Editar) ✓
     # TODO (Aula 3): adicione a opção 6 (Listar pendentes) e renumere "Sair" para 7
 
 
@@ -266,13 +298,29 @@ def main():
         elif opcao == "2":
             listar_tarefas()
 
+        elif opcao == "3":
+            listar_tarefas()
+            indice = int(input("Numero da tarefa a concluir: "))
+            concluir_tarefa(indice)
+
+        elif opcao == "4":
+            listar_tarefas()
+            indice = int(input("Numero da tarefa a remover: "))
+            remover_tarefa(indice)
+
+        elif opcao == "5":
+            listar_tarefas()
+            indice = int(input("Numero da tarefa a editar: "))
+            novo_titulo = input("Novo titulo da tarefa: ")
+            editar_tarefa(indice, novo_titulo)
+
         elif opcao == "7":
             print("Saindo do programa.")
             break
 
         # TODO (Aula 1): implemente a opção de Sair (com break) ✓
         # TODO (Aula 2): implemente as opções de concluir, remover e editar
-        #                (cada uma com try/except para ValueError)
+        #                (cada uma com try/except para ValueError) ✓
         # TODO (Aula 3): implemente a opção de listar pendentes e
         #                renumere a opção de sair
 
